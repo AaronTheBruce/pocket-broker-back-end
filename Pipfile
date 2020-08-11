@@ -6,6 +6,11 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
+psycopg2-binary = "*"
+flask = "*"
+flask-sqlalchemy = "*"
+flask-migrate = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.8"
