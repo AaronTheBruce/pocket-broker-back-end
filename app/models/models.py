@@ -75,6 +75,14 @@ class Event_Config(db.Model):
   cryptos = db.relationship("Crypto", backref='event_config', lazy=True)
   users = db.relationship("User", backref='event_config', lazy=True)
 
+  def to_dictionary(self):
+    return {
+      "id": self.id,
+      "start_date": self.start_date,
+      "end_date": self.end_date,
+      "percent_change": self.percent_change,
+    }
+
 class Event(db.Model):
   __tablename__ = "events"
 
@@ -83,6 +91,12 @@ class Event(db.Model):
   end_price = db.Column(db.Float, nullable=False)
 
   event_configs = db.relationship('Event_Config', backref='event', lazy=True)
+
+  def to_dictionary(self):
+    return {
+      "start_price": self.start_price,
+      "end_price": self.end_price,
+    }
 
 class Notification(db.Model):
   __tablename__ = "notifications"
@@ -94,3 +108,9 @@ class Notification(db.Model):
 
   users = db.relationship('User', backref='notification', nullable=False)
   events = db.relationship('Event', backref='notification', nullable=False)
+
+  def to_dictionary(self):
+    return {
+      "id": self.id,
+      "description": self.description,
+    }
