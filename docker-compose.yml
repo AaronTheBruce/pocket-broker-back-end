@@ -10,7 +10,7 @@ services:
     environment:
       FLASK_APP: pocket-broker.py
       FLASK_ENV: development
-      DATABASE_URL: postgresql://pbroker_user:61176a4dfa9a83e94789ee5ba3de1d13dec6ab328756a6f13e08c38c6c82116c@pbroker
+      DATABASE_URL: postgresql://pbroker_user:61176a4dfa9a83e94789ee5ba3de1d13dec6ab328756a6f13e08c38c6c82116c@localhost/pbroker
     networks:
       pgflaskapp:
     volumes:
