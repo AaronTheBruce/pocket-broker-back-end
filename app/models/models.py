@@ -38,11 +38,7 @@ class User(db.Model):
       "phone_number": self.phone_number,
     }
 
-  watch_list_items = db.relationship("watch_list_items", backref="user", lazy=True)
-  notifications = db.relationship("notifications", backref="user", lazy=True)
-  event_configs = db.relationship("event_configs", backref="user", lazy=True)
-
-class Watch_List_Items(db.Model):
+class Watch_List_Item(db.Model):
   __tablename__ = "watch_list_items"
 
   id = db.Column(db.Integer, primary_key=True)
@@ -56,14 +52,15 @@ class Watch_List_Items(db.Model):
       "crypto_name": self.crypto.name,
     }
 
+  users = db.relationship("User", backref="watch_list_item", lazy=True)
+  cryptos = db.relationship("Crypto", backref="watch_list_item", lazy=True)
+
 class Crypto(db.Model):
   __tablename__ = "cryptos"
 
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(25), nullable=False)
-
-  Watch_List_Items = db.relationship("Watch_List_Item", backref="crypto", lazy=True)
-  Event_Configs = db.relationship("Event_Config", backref="crypto", lazy=True)
+  symbol = db.Column(db.String(3), nullable=False)
 
 class Event_Config(db.Model):
   __tablename__ = "event_configs"
@@ -73,9 +70,10 @@ class Event_Config(db.Model):
   end_date = db.Column(db.Datetime, nullable=False)
   percent_change = db.Column(db.Numeric, nullable=False)
   crypto_id = db.Column(db.Integer, db.ForeignKey('cryptos.id'), nullable=False)
-  users_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
-  events = db.relationship('Event', backref='event_config', lazy=True)
+  cryptos = db.relationship("Crypto", backref='event_config', lazy=True)
+  users = db.relationship("User", backref='event_config', lazy=True)
 
 class Event(db.Model):
   __tablename__ = "events"
@@ -84,4 +82,15 @@ class Event(db.Model):
   start_price = db.Column(db.Float, nullable=False)
   end_price = db.Column(db.Float, nullable=False)
 
-  Event_Configs = db.relationship('Event_Config', backref='notification', lazy=True)
+  event_configs = db.relationship('Event_Config', backref='event', lazy=True)
+
+class Notification(db.Model):
+  __tablename__ = "notifications"
+
+  id = db.Column(db.Integer, primary_key=True)
+  description = db.Column(db.Text, nullable=False)
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id', nullable=False))
+  event_id = db.Column(db.Integer, db.ForeignKey('events.id', nullable=False))
+
+  users = db.relationship('User', backref='notification', nullable=False)
+  events = db.relationship('Event', backref='notification', nullable=False)
