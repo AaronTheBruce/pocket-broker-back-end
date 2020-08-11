@@ -12,8 +12,8 @@ class User(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   first_name_ = db.Column(db.String(50), nullable=False)
   last_name = db.Column(db.String(50), nullable=False)
-  email = db.Column(db.string(100), unique=True, nullable=False)
-  phone_number = db.Column(db.Integer, unique=True nullable=False)
+  email = db.Column(db.String(100), unique=True, nullable=False)
+  phone_number = db.Column(db.Integer, unique=True, nullable=False)
   hashed_password = db.Column(db.String(100), nullable=False)
 
   @property
@@ -66,8 +66,8 @@ class Event_Config(db.Model):
   __tablename__ = "event_configs"
 
   id = db.Column(db.Integer, primary_key=True)
-  start_date = db.Column(db.Datetime, nullable=False)
-  end_date = db.Column(db.Datetime, nullable=False)
+  start_date = db.Column(db.DateTime, nullable=False)
+  end_date = db.Column(db.DateTime, nullable=False)
   percent_change = db.Column(db.Numeric, nullable=False)
   crypto_id = db.Column(db.Integer, db.ForeignKey('cryptos.id'), nullable=False)
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
@@ -103,11 +103,11 @@ class Notification(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   description = db.Column(db.Text, nullable=False)
-  user_id = db.Column(db.Integer, db.ForeignKey('users.id', nullable=False))
-  event_id = db.Column(db.Integer, db.ForeignKey('events.id', nullable=False))
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+  event_id = db.Column(db.Integer, db.ForeignKey('events.id'), nullable=False)
 
-  users = db.relationship('User', backref='notification', nullable=False)
-  events = db.relationship('Event', backref='notification', nullable=False)
+  users = db.relationship('User', backref='notification', lazy=True)
+  events = db.relationship('Event', backref='notification', lazy=True)
 
   def to_dictionary(self):
     return {
