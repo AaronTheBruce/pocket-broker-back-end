@@ -68,7 +68,7 @@ class Event_Config(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   start_date = db.Column(db.DateTime, nullable=False)
   end_date = db.Column(db.DateTime, nullable=False)
-  percent_change = db.Column(db.Numeric, nullable=False)
+  percent_change = db.Column(db.Float, nullable=False)
   crypto_id = db.Column(db.Integer, db.ForeignKey('cryptos.id'), nullable=False)
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
@@ -81,6 +81,8 @@ class Event_Config(db.Model):
       "start_date": self.start_date,
       "end_date": self.end_date,
       "percent_change": self.percent_change,
+      "crypto_id": self.crypto_id,
+      "user_id": self.user_id,
     }
 
 class Event(db.Model):

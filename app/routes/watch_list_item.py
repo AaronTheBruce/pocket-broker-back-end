@@ -1,6 +1,5 @@
 from app.models.models import db, User, Crypto, Watch_List_Item
 from flask_restx import Resource, Namespace, fields
-from flask import jsonify
 
 api = Namespace('watch_list_items', description='CRUD watch_list_items')
 
@@ -50,7 +49,6 @@ class Watch_List_Items_By_Id(Resource):
       return {"message": "Watch List Item Not FOund"}, 404
     return {"message": f"Success: {wl_item}"}
 
-  @api.expect(model)
   def delete(self, user_id, crypto_id):
     # Delete an item from watchlist
     wl_item = Watch_List_Item.query.filter_by(user_id=user_id, crypto_id=crypto_id).one().to_dictionary()

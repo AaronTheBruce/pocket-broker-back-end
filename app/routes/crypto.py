@@ -8,13 +8,13 @@ model = api.model("Crypto", {
   "symbol": fields.String(description="Crypto symbol", example="BTC"),
 })
 
-@api.route("/<int:id>")
-@api.param('id', 'Crypto identifier')
+@api.route("/<int:crypto_id>")
+@api.param('crypto_id', 'Crypto identifier')
 @api.response(404, 'Crypto not found')
 class GetCrypto(Resource):
   @api.response(200, 'Crypto Found')
   @api.doc('get_crypto')
-  def get(self, id):
+  def get(self, user_id):
     # Get crypto by id
     crypto = Crypto.query.filter_by(id=id).first()
     if crypto == None:
