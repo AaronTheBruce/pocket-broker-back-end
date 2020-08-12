@@ -48,14 +48,25 @@ with app.app_context():
   )
 
   watch_item1 = Watch_List_Item(
-    user_id=1
+    user_id=1,
     crypto_id=1
   )
   watch_item2 = Watch_List_Item(
-    user_id=1
+    user_id=1,
     crypto_id=2
   )
   watch_item3 = Watch_List_Item(
-    user_id=1
+    user_id=1,
     crypto_id=3
   )
+
+  db.session.add(user1)
+  db.session.add(crypto1)
+  db.session.add(crypto2)
+  db.session.add(crypto3)
+  db.session.add(crypto4)
+  db.session.add(crypto5)
+  db.session.add(watch_item1)
+  db.session.add(watch_item2)
+  db.session.add(watch_item3)
+  db.session.commit()

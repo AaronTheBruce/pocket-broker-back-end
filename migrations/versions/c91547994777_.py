@@ -1,7 +1,7 @@
 """empty message
 
 Revision ID: c91547994777
-Revises: 
+Revises:
 Create Date: 2020-08-11 20:04:58.512082
 
 """
@@ -32,7 +32,7 @@ def upgrade():
     )
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('first_name_', sa.String(length=50), nullable=False),
+    sa.Column('first_name', sa.String(length=50), nullable=False),
     sa.Column('last_name', sa.String(length=50), nullable=False),
     sa.Column('email', sa.String(length=100), nullable=False),
     sa.Column('phone_number', sa.Integer(), nullable=False),
