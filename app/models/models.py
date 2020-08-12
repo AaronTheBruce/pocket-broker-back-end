@@ -89,6 +89,7 @@ class Event(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   start_price = db.Column(db.Float, nullable=False)
   end_price = db.Column(db.Float, nullable=False)
+  eventconfig_id = db.Column(db.Integer, db.ForeignKey('event_configs.id'), nullable=False)
 
   event_configs = db.relationship('Event_Config', backref='event', lazy=True)
 

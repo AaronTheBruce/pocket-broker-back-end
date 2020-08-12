@@ -23,28 +23,16 @@ class Watch_List_Items(Resource):
   @api.expect(model)
   def post(self, user_id):
     # Post a crypto to a user
-    # print("API payload", api.payload)
     data = api.payload
     if bool(data):
       watch_list_data = {
         "crypto_id": int(data["crypto_id"]),
         "user_id": int(data["user_id"]),
       }
-    # print("Watch List Data", watch_list_data)
       item = Watch_List_Item(**watch_list_data)
       db.session.add(item)
       db.session.commit()
       return {"message": "Successfully added item to Watch List!"}
     return { "message": "Bad Data" }
 
-
-    # user = User.query.filter_by(id=user_id).first()
-    # crypto = Crypto.query.filter_by(id=crypto_id).first()
-    # if(bool(user) and bool(crypto)):
-    #   print("New Item", new_item)
-
-    # watch_list_item = Watch_List_Item(**new_item)
-    # db.session.add(watch_list_item)
-    # db.session.commit()
-    # print("Watch List Item", watch_list_item)
-    # return { "data": data["watch_list_item"].to_dictionary() }
+  

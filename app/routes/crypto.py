@@ -19,7 +19,7 @@ class GetCrypto(Resource):
     crypto = Crypto.query.filter_by(id=id).first()
     if crypto == None:
       return {"message": "No Crypto found by that id"}, 404
-    return {"crypto": crypto.to_dictionary()}
+    return {"crypto": crypto.to_dictionary()}, 201
 
 # User is not meant to create update or destroy cryptos.
 # Only Get is supported here, as the supported cryptos will be seeded

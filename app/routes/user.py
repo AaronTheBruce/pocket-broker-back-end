@@ -22,8 +22,7 @@ class GetUser(Resource):
     # Get User By ID
     user = User.query.filter_by(id=id).one()
     if user == None:
-      return {"message": "No user found by this id", 404}
-    else:
-      return {"user": user.to_dictionary()}
+      return {"message": "No user found by this id"}, 404
+    return {"user": user.to_dictionary()}, 201
 
 # Use case of this app does not allow updating user profile's as I do not find it important right now
