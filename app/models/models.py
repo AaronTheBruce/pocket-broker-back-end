@@ -47,9 +47,9 @@ class Watch_List_Item(db.Model):
 
   def to_dictionary(self):
     return {
-      "user_first_name": self.user.first_name,
-      "user_last_name": self.user.last_name,
-      "crypto_name": self.crypto.name,
+      "id": self.id,
+      "user_id": self.user_id,
+      "crypto_id": self.crypto_id,
     }
 
   users = db.relationship("User", backref="watch_list_item", lazy=True)

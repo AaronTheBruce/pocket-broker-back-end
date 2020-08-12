@@ -38,7 +38,7 @@ with app.app_context():
   )
 
   crypto4 = Crypto(
-    name='Bitcoind Cash',
+    name='Bitcoin Cash',
     symbol='BCH'
   )
 
