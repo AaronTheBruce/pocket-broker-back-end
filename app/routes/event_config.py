@@ -22,13 +22,13 @@ class Event_Configs(Resource):
     data = [event_config for event_config in event_configs]
     print("Data", data)
     if event_configs:
-      return {"message": f"Success: {data}"}, 201
+      return {"data": data}, 201
     return {"message": "Event Configuration Not Found"}, 404
 
 @api.route("/<int:crypto_id>")
 @api.param('user_id', 'The User Identifier')
 @api.param('crypto_id', 'The Crypto Identifier')
-class Event_Config_By_Id(Resource):
+class Event_Config_By_Crypto_Id(Resource):
   @api.expect(model)
   def post(self, user_id, crypto_id):
     # Post an Event Configuration
@@ -46,3 +46,33 @@ class Event_Config_By_Id(Resource):
       db.session.commit()
       return {"message": "Successfully Configured Event!"}
     return {"message": "Bad Data, Event Not Configured..."}
+
+@api.route("/<int:event_config_id>")
+@api.param('user_id', 'The User Identifier')
+# @api.param('crypto_id', 'The Crypto Identifier')
+@api.param('event_config_id', 'The Event Config Identifier')
+class Event_Config_By_Id(Resource):
+  @api.expect(model)
+  def put(self, user_id, event_config_id):
+    data = api.payload
+    e_config = Event_Config.query.filter_by(id=event_config_id, user_id=user_id).one().to_dictionary()
+    if e_config:
+      e_config = {
+        "start_time": data["start_time"],
+        "end_time": data["end_time"],
+        "percent_change": data["percent_change"],
+      }
+      data = Event_Config(**e_config)
+      db.session.add()
+      db.session.commit()
+      return {"message": "Successfully Updated Event Config"}
+    return {"message": "Bad Data, Event Config Not Updated"}
+
+  def delete(self, user_id, event_config_id):
+    # delete event config by id and user id
+    e_config = Event_Config.query.filter_by(id=event_config_id, user_id=user_id).one().to_dictionary()
+    if e_config['user_id'] == user_id and e_config['id'] == event_config_id:
+      db.session.delete(e_config)
+      db.session.commit()
+      return {"message": "Event Config Deleted"}, 200
+    return {"message": "Event Config Not Found"}, 404
