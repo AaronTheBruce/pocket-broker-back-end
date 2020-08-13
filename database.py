@@ -4,7 +4,7 @@ load_dotenv()
 
 from app import app, db
 from app.models.models import (
-  User, Crypto, Watch_List_Item, Event, Event_Config
+  User, Crypto, Watch_List_Item, Event, Event_Config, Notification
 )
 
 with app.app_context():
@@ -73,6 +73,12 @@ with app.app_context():
     event_config_id=1
   )
 
+  notification_1 = Notification(
+    description="Test",
+    user_id=1,
+    event_id=1,
+  )
+
   db.session.add(user1)
   db.session.add(crypto1)
   db.session.add(crypto2)
@@ -84,4 +90,5 @@ with app.app_context():
   db.session.add(watch_item_3)
   db.session.add(event_config_1)
   db.session.add(event_1)
+  db.session.add(notification_1)
   db.session.commit()

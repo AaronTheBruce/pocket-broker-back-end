@@ -117,4 +117,6 @@ class Notification(db.Model):
     return {
       "id": self.id,
       "description": self.description,
+      "user_id": self.user_id,
+      "event_id": self.event_id,
     }
