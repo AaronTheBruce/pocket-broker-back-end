@@ -53,7 +53,7 @@ class Watch_List_Items_By_Id(Resource):
     # Delete an item from watchlist
     wl_item = Watch_List_Item.query.filter_by(user_id=user_id, crypto_id=crypto_id).one().to_dictionary()
     # Make damn sure it's the right item
-    if data['user_id'] == user_id and data['crypto_id'] == crypto_id:
+    if wl_item['user_id'] == user_id and wl_item['crypto_id'] == crypto_id:
       db.session.delete(wl_item)
       db.session.commit()
       return {"message": "Watch Item Successfully Removed"}, 200
