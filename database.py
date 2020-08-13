@@ -1,9 +1,10 @@
 from dotenv import load_dotenv
+import datetime
 load_dotenv()
 
 from app import app, db
 from app.models.models import (
-  User, Crypto, Watch_List_Item
+  User, Crypto, Watch_List_Item, Event, Event_Config
 )
 
 with app.app_context():
@@ -47,17 +48,29 @@ with app.app_context():
     symbol='XRP'
   )
 
-  watch_item1 = Watch_List_Item(
+  watch_item_1 = Watch_List_Item(
     user_id=1,
     crypto_id=1
   )
-  watch_item2 = Watch_List_Item(
+  watch_item_2 = Watch_List_Item(
     user_id=1,
     crypto_id=2
   )
-  watch_item3 = Watch_List_Item(
+  watch_item_3 = Watch_List_Item(
     user_id=1,
     crypto_id=3
+  )
+  event_config_1 = Event_Config(
+    start_time=datetime.datetime(2020, 8, 5),
+    end_time=datetime.datetime(2020, 8, 12),
+    percent_change=5.0,
+    crypto_id=1,
+    user_id=1,
+  )
+  event_1 = Event(
+    start_price=12000,
+    end_price=12050,
+    event_config_id=1
   )
 
   db.session.add(user1)
@@ -66,7 +79,9 @@ with app.app_context():
   db.session.add(crypto3)
   db.session.add(crypto4)
   db.session.add(crypto5)
-  db.session.add(watch_item1)
-  db.session.add(watch_item2)
-  db.session.add(watch_item3)
+  db.session.add(watch_item_1)
+  db.session.add(watch_item_2)
+  db.session.add(watch_item_3)
+  db.session.add(event_config_1)
+  db.session.add(event_1)
   db.session.commit()

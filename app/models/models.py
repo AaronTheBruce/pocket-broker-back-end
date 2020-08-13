@@ -66,8 +66,8 @@ class Event_Config(db.Model):
   __tablename__ = "event_configs"
 
   id = db.Column(db.Integer, primary_key=True)
-  start_date = db.Column(db.DateTime, nullable=False)
-  end_date = db.Column(db.DateTime, nullable=False)
+  start_time = db.Column(db.DateTime, nullable=False)
+  end_time = db.Column(db.DateTime, nullable=False)
   percent_change = db.Column(db.Float, nullable=False)
   crypto_id = db.Column(db.Integer, db.ForeignKey('cryptos.id'), nullable=False)
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
@@ -78,8 +78,8 @@ class Event_Config(db.Model):
   def to_dictionary(self):
     return {
       "id": self.id,
-      "start_date": self.start_date,
-      "end_date": self.end_date,
+      "start_time": json.dumps(self.start_time.__str__()),
+      "end_time": json.dumps(self.end_time.__str__()),
       "percent_change": self.percent_change,
       "crypto_id": self.crypto_id,
       "user_id": self.user_id,
@@ -91,7 +91,7 @@ class Event(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   start_price = db.Column(db.Float, nullable=False)
   end_price = db.Column(db.Float, nullable=False)
-  eventconfig_id = db.Column(db.Integer, db.ForeignKey('event_configs.id'), nullable=False)
+  event_config_id = db.Column(db.Integer, db.ForeignKey('event_configs.id'), nullable=False)
 
   event_configs = db.relationship('Event_Config', backref='event', lazy=True)
 
@@ -99,6 +99,7 @@ class Event(db.Model):
     return {
       "start_price": self.start_price,
       "end_price": self.end_price,
+      "event_config_id": self.event_config_id,
     }
 
 class Notification(db.Model):

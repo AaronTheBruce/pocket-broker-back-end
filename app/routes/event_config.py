@@ -35,8 +35,8 @@ class Event_Config_By_Id(Resource):
     data = api.payload
     if bool(data):
       event_config_data = {
-        "start_date": data["start_date"],
-        "end_date": data["end_date"],
+        "start_time": data["start_time"],
+        "end_time": data["end_time"],
         "percent_change": data["percent_change"],
         "crypto_id": data["crypto_id"],
         "user_id": data["user_id"],
