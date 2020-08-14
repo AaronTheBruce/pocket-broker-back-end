@@ -20,7 +20,7 @@ with app.app_context():
     last_name='Bruce',
     email='aaronbruce555@gmail.com',
     phone_number='2035251846',
-    hashed_password='password',
+    hashed_password='pbkdf2:sha256:150000$DLHLKceX$7fe8491686a2aa0a94216157342e17f5d8083de29443913031e47e50bd14caa3',
   )
 
   crypto1 = Crypto(
@@ -61,15 +61,19 @@ with app.app_context():
     crypto_id=3
   )
   event_config_1 = Event_Config(
-    start_time=datetime.datetime(2020, 8, 5),
-    end_time=datetime.datetime(2020, 8, 12),
+    time_frame="Week",
     percent_change=5.0,
+    usd_sell_price=20000.0,
+    usd_buy_price=9000.0,
+    usd_buy_power=50.0,
     crypto_id=1,
     user_id=1,
   )
   event_1 = Event(
-    start_price=12000,
-    end_price=12050,
+    usd_start_price=12000,
+    usd_end_price=12050,
+    start_time=datetime.datetime(2020, 8, 5),
+    end_time=datetime.datetime(2020, 8, 12),
     event_config_id=1
   )
 

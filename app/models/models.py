@@ -66,9 +66,11 @@ class Event_Config(db.Model):
   __tablename__ = "event_configs"
 
   id = db.Column(db.Integer, primary_key=True)
-  start_time = db.Column(db.DateTime, nullable=False)
-  end_time = db.Column(db.DateTime, nullable=False)
+  time_frame = db.Column(db.String, nullable=False)
   percent_change = db.Column(db.Float, nullable=False)
+  usd_sell_price = db.Column(db.Float, nullable=True),
+  usd_buy_price = db.Column(db.Float, nullable=True),
+  usd_buy_power = db.Column(db.Float, nullable=True),
   crypto_id = db.Column(db.Integer, db.ForeignKey('cryptos.id'), nullable=False)
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
@@ -78,8 +80,7 @@ class Event_Config(db.Model):
   def to_dictionary(self):
     return {
       "id": self.id,
-      "start_time": json.dumps(self.start_time.__str__()),
-      "end_time": json.dumps(self.end_time.__str__()),
+      "time_frame": self.time_frame,
       "percent_change": self.percent_change,
       "crypto_id": self.crypto_id,
       "user_id": self.user_id,
@@ -89,16 +90,20 @@ class Event(db.Model):
   __tablename__ = "events"
 
   id = db.Column(db.Integer, primary_key=True)
-  start_price = db.Column(db.Float, nullable=False)
-  end_price = db.Column(db.Float, nullable=False)
+  usd_start_price = db.Column(db.Float, nullable=False)
+  usd_end_price = db.Column(db.Float, nullable=False)
+  start_time = db.Column(db.DateTime, nullable=False)
+  end_time = db.Column(db.DateTime, nullable=False)
   event_config_id = db.Column(db.Integer, db.ForeignKey('event_configs.id'), nullable=False)
 
   event_configs = db.relationship('Event_Config', backref='event', lazy=True)
 
   def to_dictionary(self):
     return {
-      "start_price": self.start_price,
-      "end_price": self.end_price,
+      "usd_start_price": self.start_price,
+      "usd_end_price": self.end_price,
+      "start_time": json.dumps(self.start_time.__str__()),
+      "end_time": json.dumps(self.end_time.__str__()),
       "event_config_id": self.event_config_id,
     }
 

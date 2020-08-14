@@ -4,9 +4,11 @@ from flask_restx import Resource, Namespace, fields
 api = Namespace('event_configs', description='CRUD event_config')
 
 model = api.model("Event_Config", {
-  "start_date": fields.DateTime(required=True, description="Start time of event"),
-  "end_date": fields.DateTime(required=True, description="End time of event"),
+  "time_frame": fields.String(required=True, description="Day, Week, Month, Year"),
   "percent_change": fields.Float(required=True, description="Percent change of event"),
+  "usd_sell_price": fields.Float(required=False, description="Price willing to sell if met"),
+  "usd_buy_price": fields.Float(required=False, description="Price willing to buy if met"),
+  "usd_buy_power": fields.Float(required=False, description="US Dollar willing purchase for buy event"),
   "crypto_id": fields.Integer(required=True, description="Identifier for Crypto"),
   "user_id": fields.Integer(required=True, description="Identifier for User"),
 })
@@ -35,9 +37,11 @@ class Event_Config_By_Crypto_Id(Resource):
     data = api.payload
     if bool(data):
       event_config_data = {
-        "start_time": data["start_time"],
-        "end_time": data["end_time"],
+        "time_frame": data["time_frame"],
         "percent_change": data["percent_change"],
+        "usd_sell_price": data["usd_sell_price"],
+        "usd_buy_price": data["usd_buy_price"],
+        "usd_buy_power": data["usd_buy_power"],
         "crypto_id": data["crypto_id"],
         "user_id": data["user_id"],
       }
@@ -58,9 +62,11 @@ class Event_Config_By_Id(Resource):
     e_config = Event_Config.query.filter_by(id=event_config_id, user_id=user_id).one().to_dictionary()
     if e_config:
       e_config = {
-        "start_time": data["start_time"],
-        "end_time": data["end_time"],
+        "time_frame": data["time_frame"],
         "percent_change": data["percent_change"],
+        "usd_sell_price": data["usd_sell_price"],
+        "usd_buy_price": data["usd_buy_price"],
+        "usd_buy_power": data["usd_buy_power"],
       }
       data = Event_Config(**e_config)
       db.session.add()
