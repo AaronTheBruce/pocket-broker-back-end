@@ -7,7 +7,7 @@ model = api.model('User', {
   "firstName": fields.String(description="User first name.", example="Bob"),
   "lastName": fields.String(description="User last name.", example="Bobberton"),
   "email": fields.String(description="User Email.", example="bobbadoodle@gmail.com"),
-  "phoneNumber": fields.Integer(description="User phone number", example="8608675309"),
+  "phoneNumber": fields.String(description="User phone number", example="8608675309"),
   "password": fields.String(description="User password", example="password")
 })
 
