@@ -68,9 +68,9 @@ class Event_Config(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   time_frame = db.Column(db.String, nullable=False)
   percent_change = db.Column(db.Float, nullable=False)
-  usd_sell_price = db.Column(db.Float, nullable=True),
-  usd_buy_price = db.Column(db.Float, nullable=True),
-  usd_buy_power = db.Column(db.Float, nullable=True),
+  usd_sell_price = db.Column(db.Float, nullable=True)
+  usd_buy_price = db.Column(db.Float, nullable=True)
+  usd_buy_power = db.Column(db.Float, nullable=True)
   crypto_id = db.Column(db.Integer, db.ForeignKey('cryptos.id'), nullable=False)
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 

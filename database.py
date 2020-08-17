@@ -70,8 +70,8 @@ with app.app_context():
     user_id=1,
   )
   event_1 = Event(
-    usd_start_price=12000,
-    usd_end_price=12050,
+    usd_start_price=12000.0,
+    usd_end_price=12050.0,
     start_time=datetime.datetime(2020, 8, 5),
     end_time=datetime.datetime(2020, 8, 12),
     event_config_id=1
