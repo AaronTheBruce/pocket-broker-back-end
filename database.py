@@ -24,28 +24,33 @@ with app.app_context():
   )
 
   crypto1 = Crypto(
-    name='Bitcoin',
+    name='bitcoin',
     symbol='BTC',
   )
 
   crypto2 = Crypto(
-    name='Etherium',
+    name='ethereum',
     symbol='ETH'
   )
 
   crypto3 = Crypto(
-    name='LiteCoin',
+    name='litecoin',
     symbol='LTC'
   )
 
   crypto4 = Crypto(
-    name='Bitcoin Cash',
+    name='bitcoin-cash',
     symbol='BCH'
   )
 
   crypto5 = Crypto(
-    name='Ripple',
+    name='ripple',
     symbol='XRP'
+  )
+
+  crypto6 = Crypto(
+    name='basic-attention-token',
+    symbol='BAT'
   )
 
   watch_item_1 = Watch_List_Item(
