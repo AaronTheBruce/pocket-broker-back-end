@@ -62,6 +62,13 @@ class Crypto(db.Model):
   name = db.Column(db.String(25), nullable=False)
   symbol = db.Column(db.String(3), nullable=False)
 
+  def to_dictionary(self):
+    return {
+      "id": self.id,
+      "name": self.name,
+      "symbol": self.symbol,
+    }
+
 class Event_Config(db.Model):
   __tablename__ = "event_configs"
 

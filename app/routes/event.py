@@ -14,19 +14,7 @@ model = api.model("Event_Config", {
 @api.param('user_id', 'The User Indentifier')
 @api.param('event_config_id', 'The Event Config Indentifier')
 class Events(Resource):
-  # # get all events for a given event_config
-  # def get(self, user_id, event_config_id):
-  #   # get all event_configs with the given user_id and config_id
-  #   e_config = Event_Config.query.filter_by(user_id=user_id, id=event_config_id).first().to_dictionary()
-  #   event_user_id = e_config["user_id"]
-  #   events = Event.query.filter_by(event_config_id=event_config_id).all()
-  #   e_data = [event.to_dictionary() for event in events]
-  #   print("Events", events)
-  #   print("Event user id", event_user_id)
-  #   if e_config:
-  #     print("Data", e_config)
-  #     return {"data": data}, 201
-  #   return {"message": "Event Config not found"}, 404
+
 
   @api.expect(model)
   def post(self, user_id, event_config_id):
