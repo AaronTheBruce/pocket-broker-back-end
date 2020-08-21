@@ -23,12 +23,25 @@ class GetAllCryptos(Resource):
 @api.route("/<int:crypto_id>")
 @api.param('crypto_id', 'Crypto identifier')
 @api.response(404, 'Crypto not found')
-class GetCrypto(Resource):
+class GetCryptoById(Resource):
   @api.response(200, 'Crypto Found')
   @api.doc('get_crypto')
   def get(self, crypto_id):
     # Get crypto by id
     crypto = Crypto.query.filter_by(id=crypto_id).first()
+    if crypto == None:
+      return {"message": "No Crypto found by that id"}, 404
+    return {"crypto": crypto.to_dictionary()}, 201
+
+@api.route("/<string:crypto_name>")
+@api.param('crypto_name', 'Crypto identifier')
+@api.response(404, 'Crypto not found')
+class GetCryptoById(Resource):
+  @api.response(200, 'Crypto Found')
+  @api.doc('get_crypto')
+  def get(self, crypto_name):
+    # Get crypto by id
+    crypto = Crypto.query.filter_by(name=crypto_name).first()
     if crypto == None:
       return {"message": "No Crypto found by that id"}, 404
     return {"crypto": crypto.to_dictionary()}, 201
