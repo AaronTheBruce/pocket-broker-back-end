@@ -1,1 +1,1 @@
-web: gunicorn pocket-proker:app
+web: gunicorn app:app
