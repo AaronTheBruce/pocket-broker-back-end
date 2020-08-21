@@ -23,36 +23,38 @@ with app.app_context():
     hashed_password='pbkdf2:sha256:150000$DLHLKceX$7fe8491686a2aa0a94216157342e17f5d8083de29443913031e47e50bd14caa3',
   )
 
+  user2 = User(
+    first_name='Demo',
+    last_name='Demo',
+    email='demouser@demo.com',
+    phone_number='2038675309',
+    hashed_password='pbkdf2:sha256:150000$DLHLKceX$7fe8491686a2aa0a94216157342e17f5d8083de29443913031e47e50bd14caa3',
+  )
+
   crypto1 = Crypto(
     name='bitcoin',
     symbol='BTC',
   )
-
   crypto2 = Crypto(
     name='ethereum',
     symbol='ETH'
   )
-
   crypto3 = Crypto(
     name='litecoin',
     symbol='LTC'
   )
-
   crypto4 = Crypto(
     name='bitcoin-cash',
     symbol='BCH'
   )
-
   crypto5 = Crypto(
     name='ripple',
     symbol='XRP'
   )
-
   crypto6 = Crypto(
     name='basic-attention-token',
     symbol='BAT'
   )
-
   watch_item_1 = Watch_List_Item(
     user_id=1,
     crypto_id=1
@@ -81,13 +83,11 @@ with app.app_context():
     end_time=datetime.datetime(2020, 8, 12),
     event_config_id=1
   )
-
   notification_1 = Notification(
     description="Test",
     user_id=1,
     event_id=1,
   )
-
   db.session.add(user1)
   db.session.add(crypto1)
   db.session.add(crypto2)
