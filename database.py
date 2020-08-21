@@ -89,11 +89,13 @@ with app.app_context():
     event_id=1,
   )
   db.session.add(user1)
+  db.session.add(user2)
   db.session.add(crypto1)
   db.session.add(crypto2)
   db.session.add(crypto3)
   db.session.add(crypto4)
   db.session.add(crypto5)
+  db.session.add(crypto6)
   db.session.add(watch_item_1)
   db.session.add(watch_item_2)
   db.session.add(watch_item_3)
