@@ -55,11 +55,11 @@ with app.app_context():
     name='basic-attention-token',
     symbol='BAT'
   )
-  crypto6 = Crypto(
+  crypto7 = Crypto(
     name='dogecoin',
     symbol='DOGE'
   )
-  crypto6 = Crypto(
+  crypto8 = Crypto(
     name='ethereum-classic',
     symbol='ETC'
   )
@@ -104,6 +104,8 @@ with app.app_context():
   db.session.add(crypto4)
   db.session.add(crypto5)
   db.session.add(crypto6)
+  db.session.add(crypto7)
+  db.session.add(crypto8)
   db.session.add(watch_item_1)
   db.session.add(watch_item_2)
   db.session.add(watch_item_3)
