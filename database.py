@@ -55,6 +55,14 @@ with app.app_context():
     name='basic-attention-token',
     symbol='BAT'
   )
+  crypto6 = Crypto(
+    name='dogecoin',
+    symbol='DOGE'
+  )
+  crypto6 = Crypto(
+    name='ethereum-classic',
+    symbol='ETC'
+  )
   watch_item_1 = Watch_List_Item(
     user_id=1,
     crypto_id=1

@@ -60,7 +60,7 @@ class Crypto(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(25), nullable=False)
-  symbol = db.Column(db.String(3), nullable=False)
+  symbol = db.Column(db.String(4), nullable=False)
 
   def to_dictionary(self):
     return {
